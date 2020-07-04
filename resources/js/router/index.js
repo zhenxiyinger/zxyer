@@ -1,14 +1,22 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
+import Router from 'vue-router';
 
-export default new VueRouter({
-    saveScrollPosition: true,
+import Main from "../components/Main";
+import CategoryEdit from "../components/CategoryEdit";
+import CategoryList from "../components/CategoryList";
+
+Vue.use(Router);
+
+export default new Router({
     routes: [
         {
             name: 'Main',
             path: '/',
-            component: resolve => void(require(['../components/Main.vue'], resolve))
+            component: Main,
+            children: [
+                {path: '/categories/create', component: CategoryEdit},
+                {path: '/categories/list', component: CategoryList},
+            ]
         }
     ]
 });
